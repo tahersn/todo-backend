@@ -56,3 +56,16 @@ exports.updateTodo =async (req,res)=>{
     }
 };
 
+exports.getOneTodo = async (req, res)=>{
+  let {id}=req.params ;
+  try{ const todo = await Todo.findById(id);
+  res.send(todo);
+}
+  catch(error){
+    res.status(500).json({
+      message: "Fetching a todo failed!",
+    });
+  }
+
+};
+
