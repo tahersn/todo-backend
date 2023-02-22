@@ -1,7 +1,7 @@
-const todo = require("./model/todo");
+const Todo = require("./model/todo");
 
 exports.getTodos = (req, res, next) => {
-  todo
+  Todo
     .find()
     .then((todos) => {
       res.status(200).json({
@@ -17,12 +17,12 @@ exports.getTodos = (req, res, next) => {
 };
 
 exports.createTodo = (req, res) => {
- const Todo = new todo({
+ const todo = new Todo({
     name: req.body.name,
     completed: req.body.completed,
   });
-  console.log(Todo);
-   try{Todo.save().then((createdTodo) => {
+  console.log(todo);
+   try{todo.save().then((createdTodo) => {
      res.status(201).json({
       message: "Todo added successfully",
     });
@@ -35,7 +35,7 @@ exports.createTodo = (req, res) => {
 
 exports.deleteTodo =async (req,res)=>{
     let {id} = req.params;
-    try{ await todo.findByIdAndDelete(id);
+    try{ await Todo.findByIdAndDelete(id);
     res.send("deleted successfully");}
     catch(error){
       res.status(500).json({
@@ -46,11 +46,8 @@ exports.deleteTodo =async (req,res)=>{
 
 exports.updateTodo =async (req,res)=>{
     let {id} = req.params;
-    console.log(req.body);
-    console.log("skrrr");
     try{
-        await todo.updateOne({_id:id},req.body);
-        console.log(req.body);
+        await Todo.updateOne({_id:id},req.body);
         res.send("updated successfully");
     }  catch (error){
         res.status(500).json({

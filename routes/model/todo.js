@@ -1,7 +1,7 @@
 const { Schema, model } = require ("mongoose");
 
 
-const todo = new Schema({
+const Todo = new Schema({
     name: {
         type: String,
         required : true,
@@ -11,4 +11,4 @@ const todo = new Schema({
 {timestamps:true}
 );
 
-module.exports = model("todo", todo);
+module.exports = model("todos", Todo);
