@@ -6,6 +6,7 @@ const logger = require('morgan');
 const http =require ('http');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 dotenv.config();
 
 
@@ -35,10 +36,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors());
 app.use('/', indexRouter);
 app.use('/todos', usersRouter);
 // app.set("view engine", ".hbs");
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+ });
 
 
 

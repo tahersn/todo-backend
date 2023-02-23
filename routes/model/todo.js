@@ -2,13 +2,12 @@ const { Schema, model } = require ("mongoose");
 
 
 const Todo = new Schema({
-    name: {
+    text: {
         type: String,
         required : true,
     },
-    completed: {default: false, type: Boolean},
+    finished: {default: false, type: Boolean},
 },
-{timestamps:true}
 );
 
 module.exports = model("todos", Todo);

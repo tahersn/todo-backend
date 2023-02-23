@@ -18,8 +18,8 @@ exports.getTodos = (req, res, next) => {
 
 exports.createTodo = (req, res) => {
  const todo = new Todo({
-    name: req.body.name,
-    completed: req.body.completed,
+    text: req.body.text,
+    finished: req.body.finished,
   });
   console.log(todo);
    try{todo.save().then((createdTodo) => {
